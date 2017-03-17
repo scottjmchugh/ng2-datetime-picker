@@ -659,7 +659,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    }
 	                    _this.componentRef = undefined;
 	                    _this.popupClosed$.emit(true);
-	                }, 2000);
+	                }, 500);
 	            }
 	            event && event.stopPropagation();
 	        };
