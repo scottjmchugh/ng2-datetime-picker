@@ -1,4 +1,10 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var core_1 = require("@angular/core");
 /**
  * Static variables that you can override
@@ -9,7 +15,7 @@ var core_1 = require("@angular/core");
  *   5. formatDate(d)   default returns YYYY-MM-DD HH:MM
  *   6. parseDate(str)  default returns date from YYYY-MM-DD HH:MM
  */
-var Ng2Datetime = (function () {
+var Ng2Datetime = Ng2Datetime_1 = (function () {
     function Ng2Datetime() {
     }
     Ng2Datetime.formatDate = function (d, format, dateOnly) {
@@ -30,9 +36,9 @@ var Ng2Datetime = (function () {
     };
     Ng2Datetime.parseDate = function (dateStr, parseFormat, dateFormat) {
         if (typeof moment === 'undefined') {
-            dateStr = Ng2Datetime.removeTimezone(dateStr);
-            dateStr = dateStr + Ng2Datetime.addDSTOffset(dateStr);
-            return Ng2Datetime.parseFromDefaultFormat(dateStr);
+            dateStr = Ng2Datetime_1.removeTimezone(dateStr);
+            dateStr = dateStr + Ng2Datetime_1.addDSTOffset(dateStr);
+            return Ng2Datetime_1.parseFromDefaultFormat(dateStr);
         }
         else if (dateFormat || parseFormat) {
             // try parse using each format because changing format programmatically calls this twice,
@@ -72,7 +78,7 @@ var Ng2Datetime = (function () {
             .replace(/000Z$/, '00'); //remove timezone
     };
     Ng2Datetime.addDSTOffset = function (dateStr) {
-        var date = Ng2Datetime.parseFromDefaultFormat(dateStr);
+        var date = Ng2Datetime_1.parseFromDefaultFormat(dateStr);
         var jan = new Date(date.getFullYear(), 0, 1);
         var jul = new Date(date.getFullYear(), 6, 1);
         var stdTimezoneOffset = Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
@@ -100,80 +106,79 @@ var Ng2Datetime = (function () {
         var daysInLastMonth = lastDayOfPreviousMonth.getDate();
         var dayOfWeek = firstDayOfMonth.getDay();
         // Ensure there are always leading days to give context
-        var leadingDays = (dayOfWeek - Ng2Datetime.firstDayOfWeek + 7) % 7 || 7;
-        var trailingDays = Ng2Datetime.days.slice(0, 6 * 7 - (leadingDays + daysInMonth));
+        var leadingDays = (dayOfWeek - Ng2Datetime_1.firstDayOfWeek + 7) % 7 || 7;
+        var trailingDays = Ng2Datetime_1.days.slice(0, 6 * 7 - (leadingDays + daysInMonth));
         if (trailingDays.length > 7) {
             trailingDays = trailingDays.slice(0, trailingDays.length - 7);
         }
-        var localizedDaysOfWeek = Ng2Datetime.daysOfWeek
-            .concat(Ng2Datetime.daysOfWeek)
-            .splice(Ng2Datetime.firstDayOfWeek, 7);
+        var localizedDaysOfWeek = Ng2Datetime_1.daysOfWeek
+            .concat(Ng2Datetime_1.daysOfWeek)
+            .splice(Ng2Datetime_1.firstDayOfWeek, 7);
         var monthData = {
             year: year,
             month: month,
-            weekends: Ng2Datetime.weekends,
-            firstDayOfWeek: Ng2Datetime.firstDayOfWeek,
-            fullName: Ng2Datetime.months[month].fullName,
-            shortName: Ng2Datetime.months[month].shortName,
+            weekends: Ng2Datetime_1.weekends,
+            firstDayOfWeek: Ng2Datetime_1.firstDayOfWeek,
+            fullName: Ng2Datetime_1.months[month].fullName,
+            shortName: Ng2Datetime_1.months[month].shortName,
             localizedDaysOfWeek: localizedDaysOfWeek,
-            days: Ng2Datetime.days.slice(0, daysInMonth),
-            leadingDays: Ng2Datetime.days.slice(-leadingDays - (31 - daysInLastMonth), daysInLastMonth),
+            days: Ng2Datetime_1.days.slice(0, daysInMonth),
+            leadingDays: Ng2Datetime_1.days.slice(-leadingDays - (31 - daysInLastMonth), daysInLastMonth),
             trailingDays: trailingDays
         };
         return monthData;
     };
-    Ng2Datetime.locale = {
-        date: 'date',
-        time: 'time',
-        year: 'year',
-        month: 'month',
-        day: 'day',
-        hour: 'hour',
-        minute: 'minute',
-        currentTime: "current time"
-    };
-    Ng2Datetime.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-    Ng2Datetime.weekends = [0, 6];
-    Ng2Datetime.daysOfWeek = typeof moment === 'undefined' ? [
-        { fullName: 'Sunday', shortName: 'Su' },
-        { fullName: 'Monday', shortName: 'Mo' },
-        { fullName: 'Tuesday', shortName: 'Tu' },
-        { fullName: 'Wednesday', shortName: 'We' },
-        { fullName: 'Thursday', shortName: 'Th' },
-        { fullName: 'Friday', shortName: 'Fr' },
-        { fullName: 'Saturday', shortName: 'Sa' }
-    ] : moment.weekdays().map(function (el, index) {
-        return {
-            fullName: el,
-            shortName: moment.weekdaysShort()[index].substr(0, 2)
-        };
-    });
-    Ng2Datetime.firstDayOfWeek = typeof moment === 'undefined' ? 0 : moment.localeData().firstDayOfWeek();
-    Ng2Datetime.months = typeof moment === 'undefined' ? [
-        { fullName: 'January', shortName: 'Jan' },
-        { fullName: 'February', shortName: 'Feb' },
-        { fullName: 'March', shortName: 'Mar' },
-        { fullName: 'April', shortName: 'Apr' },
-        { fullName: 'May', shortName: 'May' },
-        { fullName: 'June', shortName: 'Jun' },
-        { fullName: 'July', shortName: 'Jul' },
-        { fullName: 'August', shortName: 'Aug' },
-        { fullName: 'September', shortName: 'Sep' },
-        { fullName: 'October', shortName: 'Oct' },
-        { fullName: 'November', shortName: 'Nov' },
-        { fullName: 'December', shortName: 'Dec' }
-    ] : moment.months().map(function (el, index) {
-        return {
-            fullName: el,
-            shortName: moment['monthsShort']()[index]
-        };
-    });
-    Ng2Datetime.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /** @nocollapse */
-    Ng2Datetime.ctorParameters = [];
     return Ng2Datetime;
 }());
+Ng2Datetime.locale = {
+    date: 'date',
+    time: 'time',
+    year: 'year',
+    month: 'month',
+    day: 'day',
+    hour: 'hour',
+    minute: 'minute',
+    currentTime: "current time"
+};
+Ng2Datetime.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+Ng2Datetime.weekends = [];
+Ng2Datetime.daysOfWeek = typeof moment === 'undefined' ? [
+    { fullName: 'Sunday', shortName: 'Su' },
+    { fullName: 'Monday', shortName: 'Mo' },
+    { fullName: 'Tuesday', shortName: 'Tu' },
+    { fullName: 'Wednesday', shortName: 'We' },
+    { fullName: 'Thursday', shortName: 'Th' },
+    { fullName: 'Friday', shortName: 'Fr' },
+    { fullName: 'Saturday', shortName: 'Sa' }
+] : moment.weekdays().map(function (el, index) {
+    return {
+        fullName: el,
+        shortName: moment.weekdaysShort()[index].substr(0, 2)
+    };
+});
+Ng2Datetime.firstDayOfWeek = typeof moment === 'undefined' ? 0 : moment.localeData().firstDayOfWeek();
+Ng2Datetime.months = typeof moment === 'undefined' ? [
+    { fullName: 'January', shortName: 'Jan' },
+    { fullName: 'February', shortName: 'Feb' },
+    { fullName: 'March', shortName: 'Mar' },
+    { fullName: 'April', shortName: 'Apr' },
+    { fullName: 'May', shortName: 'May' },
+    { fullName: 'June', shortName: 'Jun' },
+    { fullName: 'July', shortName: 'Jul' },
+    { fullName: 'August', shortName: 'Aug' },
+    { fullName: 'September', shortName: 'Sep' },
+    { fullName: 'October', shortName: 'Oct' },
+    { fullName: 'November', shortName: 'Nov' },
+    { fullName: 'December', shortName: 'Dec' }
+] : moment.months().map(function (el, index) {
+    return {
+        fullName: el,
+        shortName: moment['monthsShort']()[index]
+    };
+});
+Ng2Datetime = Ng2Datetime_1 = __decorate([
+    core_1.Injectable()
+], Ng2Datetime);
 exports.Ng2Datetime = Ng2Datetime;
+var Ng2Datetime_1;
 //# sourceMappingURL=ng2-datetime.js.map

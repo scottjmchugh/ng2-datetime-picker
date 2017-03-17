@@ -1,8 +1,20 @@
 "use strict";
-var core_1 = require('@angular/core');
-var forms_1 = require('@angular/forms');
-var ng2_datetime_picker_component_1 = require('./ng2-datetime-picker.component');
-var ng2_datetime_1 = require('./ng2-datetime');
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
+var ng2_datetime_picker_component_1 = require("./ng2-datetime-picker.component");
+var ng2_datetime_1 = require("./ng2-datetime");
 function isInteger(value) {
     if (Number.isInteger) {
         return Number.isInteger(value);
@@ -100,9 +112,11 @@ var Ng2DatetimePickerDirective = (function () {
                 return false;
             }
             else {
-                _this.componentRef.destroy();
-                _this.componentRef = undefined;
-                _this.popupClosed$.emit(true);
+                setTimeout(function () {
+                    this.componentRef.destroy();
+                    this.componentRef = undefined;
+                    this.popupClosed$.emit(true);
+                }, 200);
             }
             event && event.stopPropagation();
         };
@@ -277,39 +291,89 @@ var Ng2DatetimePickerDirective = (function () {
         }
         return date;
     };
-    Ng2DatetimePickerDirective.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: '[ng2-datetime-picker]',
-                    providers: [ng2_datetime_1.Ng2Datetime]
-                },] },
-    ];
-    /** @nocollapse */
-    Ng2DatetimePickerDirective.ctorParameters = [
-        { type: core_1.ComponentFactoryResolver, },
-        { type: core_1.ViewContainerRef, },
-        { type: forms_1.ControlContainer, decorators: [{ type: core_1.Optional }, { type: core_1.Host }, { type: core_1.SkipSelf },] },
-    ];
-    Ng2DatetimePickerDirective.propDecorators = {
-        'dateFormat': [{ type: core_1.Input, args: ['date-format',] },],
-        'parseFormat': [{ type: core_1.Input, args: ['parse-format',] },],
-        'dateOnly': [{ type: core_1.Input, args: ['date-only',] },],
-        'timeOnly': [{ type: core_1.Input, args: ['time-only',] },],
-        'closeOnSelect': [{ type: core_1.Input, args: ['close-on-select',] },],
-        'defaultValue': [{ type: core_1.Input, args: ['default-value',] },],
-        'minuteStep': [{ type: core_1.Input, args: ['minute-step',] },],
-        'minDate': [{ type: core_1.Input, args: ['min-date',] },],
-        'maxDate': [{ type: core_1.Input, args: ['max-date',] },],
-        'minHour': [{ type: core_1.Input, args: ['min-hour',] },],
-        'maxHour': [{ type: core_1.Input, args: ['max-hour',] },],
-        'disabledDates': [{ type: core_1.Input, args: ['disabled-dates',] },],
-        'showCloseLayer': [{ type: core_1.Input, args: ['show-close-layer',] },],
-        'formControlName': [{ type: core_1.Input },],
-        'ngModel': [{ type: core_1.Input, args: ['ngModel',] },],
-        'ngModelChange': [{ type: core_1.Output, args: ['ngModelChange',] },],
-        'valueChanged$': [{ type: core_1.Output, args: ['valueChanged',] },],
-        'popupClosed$': [{ type: core_1.Output, args: ['popupClosed',] },],
-    };
     return Ng2DatetimePickerDirective;
 }());
+__decorate([
+    core_1.Input('date-format'),
+    __metadata("design:type", String)
+], Ng2DatetimePickerDirective.prototype, "dateFormat", void 0);
+__decorate([
+    core_1.Input('parse-format'),
+    __metadata("design:type", String)
+], Ng2DatetimePickerDirective.prototype, "parseFormat", void 0);
+__decorate([
+    core_1.Input('date-only'),
+    __metadata("design:type", Boolean)
+], Ng2DatetimePickerDirective.prototype, "dateOnly", void 0);
+__decorate([
+    core_1.Input('time-only'),
+    __metadata("design:type", Boolean)
+], Ng2DatetimePickerDirective.prototype, "timeOnly", void 0);
+__decorate([
+    core_1.Input('close-on-select'),
+    __metadata("design:type", Boolean)
+], Ng2DatetimePickerDirective.prototype, "closeOnSelect", void 0);
+__decorate([
+    core_1.Input('default-value'),
+    __metadata("design:type", Object)
+], Ng2DatetimePickerDirective.prototype, "defaultValue", void 0);
+__decorate([
+    core_1.Input('minute-step'),
+    __metadata("design:type", Number)
+], Ng2DatetimePickerDirective.prototype, "minuteStep", void 0);
+__decorate([
+    core_1.Input('min-date'),
+    __metadata("design:type", Object)
+], Ng2DatetimePickerDirective.prototype, "minDate", void 0);
+__decorate([
+    core_1.Input('max-date'),
+    __metadata("design:type", Object)
+], Ng2DatetimePickerDirective.prototype, "maxDate", void 0);
+__decorate([
+    core_1.Input('min-hour'),
+    __metadata("design:type", Object)
+], Ng2DatetimePickerDirective.prototype, "minHour", void 0);
+__decorate([
+    core_1.Input('max-hour'),
+    __metadata("design:type", Object)
+], Ng2DatetimePickerDirective.prototype, "maxHour", void 0);
+__decorate([
+    core_1.Input('disabled-dates'),
+    __metadata("design:type", Array)
+], Ng2DatetimePickerDirective.prototype, "disabledDates", void 0);
+__decorate([
+    core_1.Input('show-close-layer'),
+    __metadata("design:type", Boolean)
+], Ng2DatetimePickerDirective.prototype, "showCloseLayer", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], Ng2DatetimePickerDirective.prototype, "formControlName", void 0);
+__decorate([
+    core_1.Input('ngModel'),
+    __metadata("design:type", Object)
+], Ng2DatetimePickerDirective.prototype, "ngModel", void 0);
+__decorate([
+    core_1.Output('ngModelChange'),
+    __metadata("design:type", Object)
+], Ng2DatetimePickerDirective.prototype, "ngModelChange", void 0);
+__decorate([
+    core_1.Output('valueChanged'),
+    __metadata("design:type", Object)
+], Ng2DatetimePickerDirective.prototype, "valueChanged$", void 0);
+__decorate([
+    core_1.Output('popupClosed'),
+    __metadata("design:type", Object)
+], Ng2DatetimePickerDirective.prototype, "popupClosed$", void 0);
+Ng2DatetimePickerDirective = __decorate([
+    core_1.Directive({
+        selector: '[ng2-datetime-picker]',
+        providers: [ng2_datetime_1.Ng2Datetime]
+    }),
+    __param(2, core_1.Optional()), __param(2, core_1.Host()), __param(2, core_1.SkipSelf()),
+    __metadata("design:paramtypes", [core_1.ComponentFactoryResolver,
+        core_1.ViewContainerRef,
+        forms_1.ControlContainer])
+], Ng2DatetimePickerDirective);
 exports.Ng2DatetimePickerDirective = Ng2DatetimePickerDirective;
 //# sourceMappingURL=ng2-datetime-picker.directive.js.map
