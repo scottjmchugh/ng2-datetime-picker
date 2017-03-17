@@ -653,11 +653,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return false;
 	            }
 	            else {
-	                setTimeout(function () {
-	                    this.componentRef.destroy();
-	                    this.componentRef = undefined;
-	                    this.popupClosed$.emit(true);
-	                }, 200);
+	                if (_this.componentRef) {
+	                    _this.componentRef.destroy();
+	                }
+	                _this.componentRef = undefined;
+	                _this.popupClosed$.emit(true);
 	            }
 	            event && event.stopPropagation();
 	        };
