@@ -213,7 +213,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        currentTime: "current time"
 	    };
 	    Ng2Datetime.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-	    Ng2Datetime.weekends = [0, 6];
+	    Ng2Datetime.weekends = [];
 	    Ng2Datetime.daysOfWeek = typeof moment === 'undefined' ? [
 	        { fullName: 'Sunday', shortName: 'Su' },
 	        { fullName: 'Monday', shortName: 'Mo' },
@@ -653,9 +653,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return false;
 	            }
 	            else {
-	                _this.componentRef.destroy();
-	                _this.componentRef = undefined;
-	                _this.popupClosed$.emit(true);
+	                setTimeout(function () {
+	                    this.componentRef.destroy();
+	                    this.componentRef = undefined;
+	                    this.popupClosed$.emit(true);
+	                }, 200);
 	            }
 	            event && event.stopPropagation();
 	        };
