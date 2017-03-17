@@ -116,7 +116,9 @@ var Ng2DatetimePickerDirective = (function () {
                     _this.componentRef.destroy();
                 }
                 _this.componentRef = undefined;
-                _this.popupClosed$.emit(true);
+                setTimeout(function () {
+                    _this.popupClosed$.emit(true);
+                }, 1000);
             }
             event && event.stopPropagation();
         };
