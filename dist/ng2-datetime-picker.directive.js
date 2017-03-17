@@ -112,13 +112,13 @@ var Ng2DatetimePickerDirective = (function () {
                 return false;
             }
             else {
-                if (_this.componentRef) {
-                    _this.componentRef.destroy();
-                }
-                _this.componentRef = undefined;
                 setTimeout(function () {
+                    if (_this.componentRef) {
+                        _this.componentRef.destroy();
+                    }
+                    _this.componentRef = undefined;
                     _this.popupClosed$.emit(true);
-                }, 1000);
+                }, 2000);
             }
             event && event.stopPropagation();
         };

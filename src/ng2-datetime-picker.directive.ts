@@ -281,14 +281,13 @@ export class Ng2DatetimePickerDirective implements OnInit, OnChanges {
     if (this.clickedDatetimePicker) {
       return false;
     } else {  /* invoked by function call */
-      if (this.componentRef) {
-        this.componentRef.destroy();
-      }
-      this.componentRef = undefined;
-
       setTimeout( () => {
+        if (this.componentRef) {
+          this.componentRef.destroy();
+        }
+        this.componentRef = undefined;    
         this.popupClosed$.emit(true);
-      }, 1000);
+      }, 2000);
     }
     event && event.stopPropagation();
   };
