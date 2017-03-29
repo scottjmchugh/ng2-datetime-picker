@@ -263,6 +263,12 @@ export class Ng2DatetimePickerDirective implements OnInit, OnChanges {
       this.hideDatetimePicker();
     });
     
+
+    setTimeout( () => {
+      this.changeDetector.markForCheck();
+      this.changeDetector.detectChanges();
+      }
+      ,500);
     //Hack not to fire tab keyup event
     // this.justShown = true;
     // setTimeout(() => this.justShown = false, 100);
@@ -332,6 +338,7 @@ export class Ng2DatetimePickerDirective implements OnInit, OnChanges {
         this.ng2DatetimePickerEl.style.top = thisElBcr.height + 'px';
       }
       this.ng2DatetimePickerEl.style.visibility = 'visible';
+      this.changeDetector.markForCheck();
       this.changeDetector.detectChanges();
     });
   };

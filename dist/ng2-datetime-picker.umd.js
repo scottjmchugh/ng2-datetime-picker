@@ -293,6 +293,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.closing$ = new core_1.EventEmitter();
 	        this.locale = ng2_datetime_1.Ng2Datetime.locale;
 	        this.el = elementRef.nativeElement;
+	        cdRef.detectChanges();
 	    }
 	    Object.defineProperty(Ng2DatetimePickerComponent.prototype, "year", {
 	        // public ngAfterViewInit ():void {
@@ -635,6 +636,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            component.closing$.subscribe(function () {
 	                _this.hideDatetimePicker();
 	            });
+	            setTimeout(function () {
+	                _this.changeDetector.markForCheck();
+	                _this.changeDetector.detectChanges();
+	            }, 500);
 	            //Hack not to fire tab keyup event
 	            // this.justShown = true;
 	            // setTimeout(() => this.justShown = false, 100);
@@ -825,6 +830,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _this.ng2DatetimePickerEl.style.top = thisElBcr.height + 'px';
 	            }
 	            _this.ng2DatetimePickerEl.style.visibility = 'visible';
+	            _this.changeDetector.markForCheck();
 	            _this.changeDetector.detectChanges();
 	        });
 	    };

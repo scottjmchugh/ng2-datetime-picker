@@ -318,6 +318,8 @@ export class Ng2DatetimePickerComponent {
     public cdRef: ChangeDetectorRef
   ) {
     this.el = elementRef.nativeElement;
+
+    cdRef.detectChanges();
   }
 
   // public ngAfterViewInit ():void {

@@ -24,6 +24,7 @@ var Ng2DatetimePickerComponent = (function () {
         this.closing$ = new core_1.EventEmitter();
         this.locale = ng2_datetime_1.Ng2Datetime.locale;
         this.el = elementRef.nativeElement;
+        cdRef.detectChanges();
     }
     Object.defineProperty(Ng2DatetimePickerComponent.prototype, "year", {
         // public ngAfterViewInit ():void {
