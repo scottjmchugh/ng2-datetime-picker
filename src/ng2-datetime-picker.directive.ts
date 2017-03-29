@@ -1,6 +1,6 @@
 import {
   ComponentFactoryResolver, ComponentRef, Directive, EventEmitter, Host,
-  Input, OnChanges, OnInit, Optional, Output,
+  Input, OnChanges, ChangeDetectorRef, OnInit, Optional, Output,
   SimpleChanges, SkipSelf, ViewContainerRef
 } from '@angular/core';
 import {AbstractControl, ControlContainer, FormGroup, FormGroupDirective} from '@angular/forms';
@@ -66,6 +66,7 @@ export class Ng2DatetimePickerDirective implements OnInit, OnChanges {
   constructor (
     private resolver:ComponentFactoryResolver,
     private viewContainerRef:ViewContainerRef,
+    private changeDetector: ChangeDetectorRef,
     @Optional() @Host() @SkipSelf() private parent: ControlContainer
   ) {
     this.el = this.viewContainerRef.element.nativeElement;
@@ -256,6 +257,7 @@ export class Ng2DatetimePickerDirective implements OnInit, OnChanges {
     component.showCloseLayer = this.showCloseLayer;
 
     this.styleDatetimePicker();
+    this.changeDetector.detectChanges();
 
     component.selected$.subscribe(this.dateSelected);
     component.closing$.subscribe(() => {

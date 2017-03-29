@@ -35,10 +35,11 @@ function isNaN(value) {
  * If the given string is not a valid date, it defaults back to today
  */
 var Ng2DatetimePickerDirective = (function () {
-    function Ng2DatetimePickerDirective(resolver, viewContainerRef, parent) {
+    function Ng2DatetimePickerDirective(resolver, viewContainerRef, changeDetector, parent) {
         var _this = this;
         this.resolver = resolver;
         this.viewContainerRef = viewContainerRef;
+        this.changeDetector = changeDetector;
         this.parent = parent;
         this.closeOnSelect = true;
         this.ngModelChange = new core_1.EventEmitter();
@@ -89,6 +90,7 @@ var Ng2DatetimePickerDirective = (function () {
             component.showCloseButton = _this.closeOnSelect === false;
             component.showCloseLayer = _this.showCloseLayer;
             _this.styleDatetimePicker();
+            _this.changeDetector.detectChanges();
             component.selected$.subscribe(_this.dateSelected);
             component.closing$.subscribe(function () {
                 _this.hideDatetimePicker();
@@ -118,7 +120,7 @@ var Ng2DatetimePickerDirective = (function () {
                     }
                     _this.componentRef = undefined;
                     _this.popupClosed$.emit(true);
-                }, 500);
+                }, 500); // Delay is necessary otherwise object becomes undefined before destroy completes, resulting in a console error
             }
             event && event.stopPropagation();
         };
@@ -372,9 +374,10 @@ Ng2DatetimePickerDirective = __decorate([
         selector: '[ng2-datetime-picker]',
         providers: [ng2_datetime_1.Ng2Datetime]
     }),
-    __param(2, core_1.Optional()), __param(2, core_1.Host()), __param(2, core_1.SkipSelf()),
+    __param(3, core_1.Optional()), __param(3, core_1.Host()), __param(3, core_1.SkipSelf()),
     __metadata("design:paramtypes", [core_1.ComponentFactoryResolver,
         core_1.ViewContainerRef,
+        core_1.ChangeDetectorRef,
         forms_1.ControlContainer])
 ], Ng2DatetimePickerDirective);
 exports.Ng2DatetimePickerDirective = Ng2DatetimePickerDirective;
