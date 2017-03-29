@@ -257,7 +257,6 @@ export class Ng2DatetimePickerDirective implements OnInit, OnChanges {
     component.showCloseLayer = this.showCloseLayer;
 
     this.styleDatetimePicker();
-    this.changeDetector.detectChanges();
 
     component.selected$.subscribe(this.dateSelected);
     component.closing$.subscribe(() => {
@@ -333,6 +332,7 @@ export class Ng2DatetimePickerDirective implements OnInit, OnChanges {
         this.ng2DatetimePickerEl.style.top = thisElBcr.height + 'px';
       }
       this.ng2DatetimePickerEl.style.visibility = 'visible';
+      this.changeDetector.detectChanges();
     });
   };
 

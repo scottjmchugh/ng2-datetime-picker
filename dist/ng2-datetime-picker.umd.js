@@ -631,7 +631,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            component.showCloseButton = _this.closeOnSelect === false;
 	            component.showCloseLayer = _this.showCloseLayer;
 	            _this.styleDatetimePicker();
-	            _this.changeDetector.detectChanges();
 	            component.selected$.subscribe(_this.dateSelected);
 	            component.closing$.subscribe(function () {
 	                _this.hideDatetimePicker();
@@ -826,6 +825,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _this.ng2DatetimePickerEl.style.top = thisElBcr.height + 'px';
 	            }
 	            _this.ng2DatetimePickerEl.style.visibility = 'visible';
+	            _this.changeDetector.detectChanges();
 	        });
 	    };
 	    ;
