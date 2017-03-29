@@ -97,7 +97,7 @@ var Ng2DatetimePickerDirective = (function () {
             setTimeout(function () {
                 _this.changeDetector.markForCheck();
                 _this.changeDetector.detectChanges();
-            }, 500);
+            }, 200);
             //Hack not to fire tab keyup event
             // this.justShown = true;
             // setTimeout(() => this.justShown = false, 100);

@@ -268,7 +268,7 @@ export class Ng2DatetimePickerDirective implements OnInit, OnChanges {
       this.changeDetector.markForCheck();
       this.changeDetector.detectChanges();
       }
-      ,500);
+      ,200);
     //Hack not to fire tab keyup event
     // this.justShown = true;
     // setTimeout(() => this.justShown = false, 100);
