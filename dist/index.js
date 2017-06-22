@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var ng2_datetime_1 = require("./ng2-datetime");
 exports.Ng2Datetime = ng2_datetime_1.Ng2Datetime;
 var ng2_datetime_picker_component_1 = require("./ng2-datetime-picker.component");
